@@ -12,6 +12,7 @@ const Auth = () => {
     const { email, password } = form
     //회원가입과 로그인 
     const [newAccount, setNewAccount] = useState(true)
+    const [error, setError] = useState('')
 
     const onChange = (e) => {
         const { value, name } = e.target
@@ -37,7 +38,7 @@ const Auth = () => {
             }
             console.log(data)
         } catch(error){
-            console.log(error)
+            setError(error.message)
         }
     }
 
@@ -64,6 +65,7 @@ const Auth = () => {
                type="submit" 
                value={newAccount ? "Create Account" : "Log In"}
                />
+               {error}
            </form>
            <div>
                <button>Continue with Google</button>
