@@ -1,7 +1,6 @@
-//절대경로 설정
 {
   "compilerOptions": {
     "baseUrl": "src"
   },
-  "include": ["src"]
+  "include": ["src"]  
 }
