@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Auth from 'routes/Auth';
 import Home from 'routes/Home';
 import Profile from 'routes/Profile';
@@ -25,6 +25,8 @@ const AppRouter = ({ isLoggedIn }) => {
                         <Auth/>
                     </Route>
                 )}
+                {/* Redirect: from에 있는 값이 엔드포인트와 같지 않으면 to로 이동 */}
+                {/* <Redirect from="*" to="/"/> */}
             </Switch>
         </Router>
     );
