@@ -29,6 +29,7 @@ const Auth = () => {
             let data;
             if(newAccount){
                 //Create newAccount
+                //브라우저 내장 데이터베이스(IndexedDB)에 사용자 정보 저장됨 
                 data = await authService.createUserWithEmailAndPassword(email, password)
             } else {
                 //Log In
