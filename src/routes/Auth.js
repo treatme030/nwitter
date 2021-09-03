@@ -58,7 +58,7 @@ const Auth = () => {
         console.log(data)
     }
 
-    return (
+    return ( 
         <div>
            <form onSubmit={onSubmit}>
                <input 
