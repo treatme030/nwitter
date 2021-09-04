@@ -1,3 +1,4 @@
+import Sweet from 'components/Sweet';
 import { dbService } from 'fbase';
 import React, { useEffect, useState } from 'react';
 
@@ -46,14 +47,7 @@ const Home = ({ userObj }) => {
                 <input type="submit" value="Sweet"/>
             </form>
             <div>
-                { sweets.map((sweet) => {
-                    const { id, text } = sweet
-                    return (
-                        <div key={id}>
-                            <h4>{text}</h4>
-                        </div>
-                    )
-                })}
+                { sweets.map((sweet) => <Sweet key={sweet.id} {...sweet}/>)}
             </div>
         </>
     );
