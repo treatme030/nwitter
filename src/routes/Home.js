@@ -9,16 +9,17 @@ const Home = () => {
     //firestore에서 도큐먼트 읽어오기
     const getSweets = async () => {
         const dbSweets = await dbService.collection("sweets").get()//스냅샷으로 들어옴
-        dbSweets.forEach((document) => 
-            setSweets([document.data(), ...sweets])
-        )
+        dbSweets.forEach((document) => {
+            const newObject = {...document.data(), id: document.id}//도큐먼트에 있는 id 속성으로 id 생성
+            setSweets([newObject, ...sweets])
+        })
     }
     //useEffect에 async-await문을 쓴 함수는 따로 정의하고, 실행만 그 안에서 해야 함 
     useEffect(() => {
         getSweets()
     },[])
     console.log(sweets)
-    
+
     const onChange = (e) => {
         const { value } = e.target
         setSweet(value)
