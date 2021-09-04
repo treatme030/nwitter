@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { dbService } from 'fbase';
 
-const Sweet = ({ id, text, isOwner }) => {
+const Sweet = ({ id, text, attachmentUrl, isOwner }) => {
     const [editing, setEditing] = useState(false)
     const [newSweet, setNewSweet] = useState(text)
 
@@ -42,6 +42,9 @@ const Sweet = ({ id, text, isOwner }) => {
             ) : (
                 <>
                     <h4>{text}</h4>
+                    { attachmentUrl && (
+                        <img src={attachmentUrl} width="50px" height="50px"/>
+                    )}
                     {/* 유저와 작성자가 동일한 경우에만 버튼 보이도록 */}
                     { isOwner && (
                         <>

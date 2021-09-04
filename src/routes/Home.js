@@ -29,18 +29,23 @@ const Home = ({ userObj }) => {
     //firestore에 데이터 저장하기
     const onSubmit = async (e) => {
         e.preventDefault()
+        let attachmentUrl = '';
+        if(attachment !== ''){
+            //storage는 아이디를 자동으로 생성하지 않음 
+            //userObj.uid: 폴더명, uuidv4(): 파일이름 
+            const attachmentRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`)
+            const response = await attachmentRef.putString(attachment, "data_url")
+            attachmentUrl = await response.ref.getDownloadURL()//파일을 다운로드 할 수 있는 URL 반환
+        }
         //컬렉션을 생성하고, 해당 컬렉션에 도큐먼트 추가 
-        /*await dbService.collection("sweets").add({
+        await dbService.collection("sweets").add({
             text: sweet,
             createdAt: Date.now(),
             creatorId: userObj.uid,
+            attachmentUrl,
         })
-        setSweet('')*/
-        //storage는 아이디를 자동으로 생성하지 않음 
-        //userObj.uid: 폴더명, uuidv4(): 파일이름 
-        const attachmentRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`)
-        const response = await attachmentRef.putString(attachment, "data_url")
-        console.log(response)
+        setSweet('')
+        setAttachment('')
     }
 
     //웹 브라우저에 사진 출력하기 
