@@ -47,7 +47,14 @@ const Home = ({ userObj }) => {
                 <input type="submit" value="Sweet"/>
             </form>
             <div>
-                { sweets.map((sweet) => <Sweet key={sweet.id} {...sweet}/>)}
+                { sweets.map((sweet) => (
+                    <Sweet 
+                    key={sweet.id} 
+                    {...sweet}
+                    isOwner={sweet.creatorId === userObj.uid}
+                    //작성한 유저만에 삭제, 수정 가능하도록
+                    />
+                ))}
             </div>
         </>
     );
