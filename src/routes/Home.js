@@ -1,7 +1,7 @@
 import { dbService } from 'fbase';
 import React, { useEffect, useState } from 'react';
 
-const Home = () => {
+const Home = ({ userObj }) => {
     const [sweet, setSweet] = useState('')
     //firestore에서 받은 데이터 상태관리
     const [sweets, setSweets] = useState([])
@@ -31,6 +31,7 @@ const Home = () => {
         await dbService.collection("sweets").add({
             text: sweet,
             createdAt: Date.now(),
+            creatorId: userObj.uid,
         })
         setSweet('')
     }
