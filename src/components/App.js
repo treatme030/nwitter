@@ -26,7 +26,6 @@ function App() {
     <>
       {/* init 상태 변경되면 해당 화면 보여주기 */}
       { init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj}/> : "initializing"}
-      <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
     </>
   );
 }
