@@ -5,18 +5,16 @@ const Home = ({ userObj }) => {
     const [sweet, setSweet] = useState('')
     //firestore에서 받은 데이터 상태관리
     const [sweets, setSweets] = useState([])
-
-    //firestore에서 도큐먼트 읽어오기
-    const getSweets = async () => {
-        const dbSweets = await dbService.collection("sweets").get()//스냅샷으로 들어옴
-        dbSweets.forEach((document) => {
-            const newObject = {...document.data(), id: document.id}//도큐먼트에 있는 id 속성으로 id 생성
-            setSweets((prev) => [newObject, ...prev])
-        })
-    }
-    //useEffect에 async-await문을 쓴 함수는 따로 정의하고, 실행만 그 안에서 해야 함 
+    
+    //실시간 데이터베이스 
     useEffect(() => {
-        getSweets()
+        dbService.collection("sweets").onSnapshot((snapshot) => {
+            const newArray = snapshot.docs.map((document) => ({
+                id: document.id,
+                ...document.data(),
+            }))
+            setSweets(newArray)
+        })
     },[])
 
     const onChange = (e) => {
