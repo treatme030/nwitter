@@ -11,14 +11,13 @@ const Home = () => {
         const dbSweets = await dbService.collection("sweets").get()//스냅샷으로 들어옴
         dbSweets.forEach((document) => {
             const newObject = {...document.data(), id: document.id}//도큐먼트에 있는 id 속성으로 id 생성
-            setSweets([newObject, ...sweets])
+            setSweets((prev) => [newObject, ...prev])
         })
     }
     //useEffect에 async-await문을 쓴 함수는 따로 정의하고, 실행만 그 안에서 해야 함 
     useEffect(() => {
         getSweets()
     },[])
-    console.log(sweets)
 
     const onChange = (e) => {
         const { value } = e.target
@@ -36,16 +35,28 @@ const Home = () => {
         setSweet('')
     }
     return (
-        <form onSubmit={onSubmit}>
-            <input 
-            type="text" 
-            placeholder="What's on your mind?" 
-            maxLength={120}
-            value={sweet}
-            onChange={onChange}
-            />
-            <input type="submit" value="Sweet"/>
-        </form>
+        <>
+            <form onSubmit={onSubmit}>
+                <input 
+                type="text" 
+                placeholder="What's on your mind?" 
+                maxLength={120}
+                value={sweet}
+                onChange={onChange}
+                />
+                <input type="submit" value="Sweet"/>
+            </form>
+            <div>
+                { sweets.map((sweet) => {
+                    const { id, text } = sweet
+                    return (
+                        <div key={id}>
+                            <h4>{text}</h4>
+                        </div>
+                    )
+                })}
+            </div>
+        </>
     );
 };
 
