@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { dbService } from 'fbase';
+import { dbService, storageService } from 'fbase';
 
 const Sweet = ({ id, text, attachmentUrl, isOwner }) => {
     const [editing, setEditing] = useState(false)
@@ -8,7 +8,10 @@ const Sweet = ({ id, text, attachmentUrl, isOwner }) => {
     const onDeleteClick = async () => {
         const ok = window.confirm('삭제하시겠습니까?')//boolean 값 반환 
         if(ok){
-            const data = await dbService.doc(`sweets/${id}`).delete()
+            await dbService.doc(`sweets/${id}`).delete()
+            if(attachmentUrl !== ''){ //저장된 이미지 삭제 
+                await storageService.refFromURL(attachmentUrl).delete()
+            }
         }
     }
 
