@@ -6,6 +6,8 @@ const Home = ({ userObj }) => {
     const [sweet, setSweet] = useState('')
     //firestore에서 받은 데이터 상태관리
     const [sweets, setSweets] = useState([])
+    //URL 상태관리
+    const [attachment, setAttachment] = useState('')
     
     //실시간 데이터베이스 
     useEffect(() => {
@@ -43,7 +45,8 @@ const Home = ({ userObj }) => {
         //onloadend: readAsDataURL함수로 전달할 인자(파일)가 함수로 들어간 이후
         //결괏값이 나온 다음 상황 감지하고, 그때 생긴 이벤트값을 사용 가능하게 해줌 
         reader.onloadend = (finishedEvent) => {
-            console.log(finishedEvent)
+            const { result } = finishedEvent.currentTarget
+            setAttachment(result)
         }
         //readAsDataURL함수: 파일 정보를 인자로 받아서 파일 위치를 URL로 반환
         //웹 브라우저가 파일을 인식하는 시점, 파일 인식이 끝난 시점까지 함께 관리해줘야
@@ -63,6 +66,7 @@ const Home = ({ userObj }) => {
                 />
                 <input type="file" accept="image/*" onChange={onFileChange}/>
                 <input type="submit" value="Sweet"/>
+                { attachment && <img src={attachment} width="50px" height="50px"/>}
             </form>
             <div>
                 { sweets.map((sweet) => (
