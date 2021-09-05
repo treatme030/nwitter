@@ -1,5 +1,46 @@
 import React, { useState } from 'react';
 import { authService } from "fbase";
+import styled from 'styled-components';
+
+const AuthFormStyles = styled.div`
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    .authInput {
+        max-width: 320px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 30px;
+        background-color: rgba(255, 255, 255, 1);
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: black; 
+    }
+    .authSubmit {
+        text-align: center;
+        background: #04aaff;
+        color: white;
+        margin-top: 10;
+        cursor: pointer;
+    }
+    .authError {
+        color: tomato;
+        text-align: center;
+        font-weight: 500;
+        font-size: 12px;
+    }
+    .authSwitch {
+        color: #04aaff;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-bottom: 50px;
+        display: block;
+        font-size: 12px;
+        text-decoration: underline;
+        text-align: center;
+    }
+`;
 
 const AuthForm = () => {
     // const [email, setEmail] = useState('')
@@ -46,7 +87,7 @@ const AuthForm = () => {
     }
     
     return (
-        <>
+        <AuthFormStyles>
            <form onSubmit={onSubmit}>
                <input 
                type="email" 
@@ -55,6 +96,7 @@ const AuthForm = () => {
                required
                value={email}
                onChange={onChange}
+               className="authInput"
                />
                <input 
                type="password" 
@@ -63,17 +105,19 @@ const AuthForm = () => {
                required
                value={password}
                onChange={onChange}
+               className="authInput"
                />
                <input 
                type="submit" 
                value={newAccount ? "Create Account" : "Log In"}
+               className="authInput authSubmit"
                />
-               {error}
+               {error && <span className="authError">{error}</span>}
            </form>
-           <span onClick={toggleAccount}>
+           <span onClick={toggleAccount} className="authSwitch">
            {newAccount ? "Sign In" : "Create Account"}
            </span>
-        </>
+        </AuthFormStyles>
     );
 };
 
