@@ -13,8 +13,13 @@ function App() {
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if(user){
-        setIsLoggedIn(user)
-        setUserObj(user)
+        //리액트는 상태나 프롭스 내용물이 많으면, 그 안에 작은 변화를 제대로 인식하지 못함
+        //user에서 사용하는 것만 뽑아 넣어주기, 크기 줄이고, 가볍게
+        setUserObj({  
+          uid: user.uid,
+          displayName: user.displayName,
+          updateProfile: (args) => user.updateProfile(args),
+        })
       } else {
         setIsLoggedIn(false)
       }
@@ -22,10 +27,28 @@ function App() {
     })
   },[])
 
+  //새 user를 userObj에 업데이트 하기  
+  const refreshUser = () => {
+    const user = authService.currentUser
+    setUserObj({
+      uid: user.uid,
+      displayName: user.displayName,
+      updateProfile: (args) => user.updateProfile(args),
+    })
+  }
+
   return (
     <>
       {/* init 상태 변경되면 해당 화면 보여주기 */}
-      { init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj}/> : "initializing"}
+      { init ? (
+        <AppRouter 
+        isLoggedIn={Boolean(userObj)} 
+        userObj={userObj} 
+        refreshUser={refreshUser}
+        />
+      ) : (
+        "initializing"
+      )}
     </>
   );
 }
