@@ -3,8 +3,6 @@ import AppRouter from "components/Router";
 import { authService } from "fbase";
 
 function App() {
-  //currentUser에 따라 로그인 상태 변경
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
   //로그인 정보 받고 상태가 변경되었는지  
   const [init, setInit] = useState(false)
   const [userObj, setUserObj] = useState(null)
@@ -21,7 +19,7 @@ function App() {
           updateProfile: (args) => user.updateProfile(args),
         })
       } else {
-        setIsLoggedIn(false)
+        setUserObj(false)
       }
       setInit(true)
     })
