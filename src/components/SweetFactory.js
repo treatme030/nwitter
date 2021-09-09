@@ -40,8 +40,15 @@ const SweetFactoryStyles = styled.form`
         }
     }
     .factory_label {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: #04aaff;
         cursor: pointer;
+        span {
+            padding: 0 1rem;
+        }
     }
     .factoryFrom_attachment {
         display: flex;
@@ -53,12 +60,16 @@ const SweetFactoryStyles = styled.form`
             border-radius: 40px;
         }
         .factoryForm_clear {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: #04aaff;
             cursor: pointer;
             text-align: center;
+            margin: 1rem 0;
             span {
-                margin-right: 1rem;
                 font-size: 1.2rem;
+                padding: 0 1rem;
             }
         }
     }

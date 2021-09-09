@@ -16,6 +16,10 @@ const AuthFormStyles = styled.div`
         margin-bottom: 10px;
         font-size: 12px;
         color: black; 
+        &::placeholder {
+            color: white;
+            opacity: 0.9;
+        }
     }
     .authSubmit {
         text-align: center;
