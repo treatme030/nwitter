@@ -2,6 +2,14 @@ import { dbService } from 'fbase';
 import React, { useEffect, useState } from 'react';
 import Sweet from 'components/Sweet';
 import SweetFactory from 'components/SweetFactory';
+import styled from 'styled-components';
+
+const HomeStyles = styled.div`
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+`;
 
 const Home = ({ userObj }) => {
     //firestore에서 받은 데이터 상태관리
@@ -20,7 +28,7 @@ const Home = ({ userObj }) => {
 
 
     return (
-        <>
+        <HomeStyles>
             <SweetFactory userObj={userObj}/>
             <div>
                 { sweets.map((sweet) => (
@@ -32,7 +40,7 @@ const Home = ({ userObj }) => {
                     />
                 ))}
             </div>
-        </>
+        </HomeStyles>
     );
 };
 

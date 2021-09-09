@@ -3,7 +3,16 @@ import Auth from 'routes/Auth';
 import Home from 'routes/Home';
 import Profile from 'routes/Profile';
 import Navigation from './Navigation';
+import styled from 'styled-components';
 
+const RouterStyles = styled.div`
+    max-width: 890px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 8rem;
+    display: flex;
+    justify-content: center;
+`;
 
 const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
 
@@ -12,14 +21,14 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
             { isLoggedIn && <Navigation userObj={userObj}/> }
             <Switch>
                 { isLoggedIn ? (
-                    <>
+                    <RouterStyles>
                         <Route exact path="/">
                             <Home userObj={userObj}/>
                         </Route>
                         <Route exact path="/profile">
                             <Profile userObj={userObj} refreshUser={refreshUser}/>
                         </Route>
-                    </>
+                    </RouterStyles>
                 ) : (
                     <Route exact path="/">
                         <Auth/>

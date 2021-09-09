@@ -1,18 +1,51 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaTwitter, FaUser } from 'react-icons/fa';
+import styled from 'styled-components';
+
+const NavigationStyles = styled.nav`
+    ul {
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem;
+        .nav_home {
+            margin-right: 1rem;
+        }
+        .icon {
+            color: #04AAFF;
+        }
+        .nav_progile {
+            margin-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.2rem;
+            span {
+                margin-top: 1rem;
+            }
+        }
+    }
+`;
 
 const Navigation = ({ userObj }) => {
     return (
-        <nav>
+        <NavigationStyles>
            <ul>
                <li>
-                   <Link to="/">Home</Link>
+                    <Link to="/" className='nav_home'>
+                        <FaTwitter className='icon' size='5ex'/>
+                    </Link>
                </li>
                <li>
-                   <Link to="/profile">{userObj.displayName}의 Profile</Link>
+                    <Link to="/profile" className='nav_progile'>
+                        <FaUser className='icon' size='5ex'/>
+                        <span>
+                            { userObj.displayName ? `${userObj.displayName}의 Profile` : "Profile"}
+                        </span>
+                    </Link>
                </li>
            </ul>
-        </nav>
+        </NavigationStyles>
     );
 };
 

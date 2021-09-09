@@ -51,7 +51,7 @@ const Auth = () => {
 
     return ( 
         <AuthStyles>
-            <FaTwitter className="icon_twitter" size="4ex"/>
+            <FaTwitter className="icon_twitter" size="5ex"/>
             <AuthForm/>
            <div className="authBtns">
                 <button name="google" onClick={onSocialClick} className="authBtn">
