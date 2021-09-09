@@ -17,7 +17,9 @@ const Home = ({ userObj }) => {
     
     //실시간 데이터베이스 
     useEffect(() => {
-        dbService.collection("sweets").onSnapshot((snapshot) => {
+        dbService.collection("sweets")
+        .orderBy("createdAt", "desc")
+        .onSnapshot((snapshot) => {
             const newArray = snapshot.docs.map((document) => ({
                 id: document.id,
                 ...document.data(),
