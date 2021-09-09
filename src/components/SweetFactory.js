@@ -37,6 +37,7 @@ const SweetFactoryStyles = styled.form`
             text-align: center;
             border-radius: 20px;
             color: #fff;
+            cursor: pointer;
         }
     }
     .factory_label {
@@ -132,7 +133,9 @@ const SweetFactory = ({ userObj }) => {
         //readAsDataURL함수: 파일 정보를 인자로 받아서 파일 위치를 URL로 반환
         //웹 브라우저가 파일을 인식하는 시점, 파일 인식이 끝난 시점까지 함께 관리해줘야
         //URL을 얻을 수 있음 
-        reader.readAsDataURL(theFile)
+        if(Boolean(theFile)){
+            reader.readAsDataURL(theFile)
+        }
     }
     //파일 선택 취소하기 
     const onClearAttachment = () => setAttachment('')
