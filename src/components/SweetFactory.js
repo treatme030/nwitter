@@ -46,8 +46,12 @@ const SweetFactoryStyles = styled.form`
         align-items: center;
         color: #04aaff;
         cursor: pointer;
+        transition: color .4s;
         span {
             padding: 0 1rem;
+        }
+        &:hover {
+            color: tomato;
         }
     }
     .factoryFrom_attachment {
@@ -67,9 +71,13 @@ const SweetFactoryStyles = styled.form`
             cursor: pointer;
             text-align: center;
             margin: 1rem 0;
+            transition: color .4s;
             span {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
                 padding: 0 1rem;
+            }
+            &:hover {
+                color: tomato;
             }
         }
     }

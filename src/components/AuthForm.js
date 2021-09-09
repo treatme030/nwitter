@@ -16,7 +16,7 @@ const AuthFormStyles = styled.div`
         margin-bottom: 10px;
         font-size: 12px;
         color: black; 
-        &::placeholder {
+        &:placeholder {
             color: white;
             opacity: 0.9;
         }
