@@ -1,6 +1,68 @@
 import React, { useState } from 'react';
 import { dbService, storageService } from 'fbase';
 import { v4 as uuidv4 } from 'uuid';
+import { FaPlus, FaTimes } from 'react-icons/fa'
+import styled from 'styled-components';
+
+const SweetFactoryStyles = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    .factoryInput_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        position: relative;
+        margin-bottom: 2rem;
+        width: 100%;
+        .factoryInput_input {
+            flex-grow: 1;
+            height: 40px;
+            padding: 0 2rem;
+            color: #fff;
+            border: 1px solid #04aaff;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        .factoryInput_arrow {
+            position: absolute;
+            right: 0;
+            background-color: #04aaff;
+            height: 40px;
+            width: 40px;
+            padding: 1rem 0;
+            text-align: center;
+            border-radius: 20px;
+            color: #fff;
+        }
+    }
+    .factory_label {
+        color: #04aaff;
+        cursor: pointer;
+    }
+    .factoryFrom_attachment {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        img {
+            height: 80px;
+            width: 80px;
+            border-radius: 40px;
+        }
+        .factoryForm_clear {
+            color: #04aaff;
+            cursor: pointer;
+            text-align: center;
+            span {
+                margin-right: 1rem;
+                font-size: 1.2rem;
+            }
+        }
+    }
+`;
 
 const SweetFactory = ({ userObj }) => {
     const [sweet, setSweet] = useState('')
@@ -15,6 +77,9 @@ const SweetFactory = ({ userObj }) => {
     //firestore에 데이터 저장하기
     const onSubmit = async (e) => {
         e.preventDefault()
+        if(sweet === ''){
+            return;
+        }
         let attachmentUrl = '';
         if(attachment !== ''){
             //storage는 아이디를 자동으로 생성하지 않음 
@@ -54,23 +119,41 @@ const SweetFactory = ({ userObj }) => {
     const onClearAttachment = () => setAttachment('')
     
     return (
-        <form onSubmit={onSubmit}>
+        <SweetFactoryStyles onSubmit={onSubmit}>
+            <div className="factoryInput_container">
+                <input 
+                type="text" 
+                placeholder="What's on your mind?" 
+                maxLength={120}
+                value={sweet}
+                onChange={onChange}
+                className="factoryInput_input"
+                />
+                <input type="submit" value="&rarr;" className="factoryInput_arrow"/>
+            </div>
+            <label htmlFor="attach-file" className="factory_label">
+                <span>Add photos</span>
+                <FaPlus/>
+            </label>
             <input 
-            type="text" 
-            placeholder="What's on your mind?" 
-            maxLength={120}
-            value={sweet}
-            onChange={onChange}
-            />
-            <input type="file" accept="image/*" onChange={onFileChange}/>
-            <input type="submit" value="Sweet"/>
+            id="attach-file" 
+            type="file" 
+            accept="image/*" 
+            onChange={onFileChange}
+            style={{ opacity: 0 }}/>
             { attachment && (
-                <div>
-                    <img src={attachment} width="50px" height="50px"/>
-                    <button onClick={onClearAttachment}>Clear</button>
+                <div className="factoryFrom_attachment">
+                    <img 
+                    src={attachment} 
+                    style={{ backgroundImage: attachment }}
+                    />
+                    <div className="factoryForm_clear" onClick={onClearAttachment}>
+                        <span>Remove</span>
+                        <FaTimes/>
+                    </div>
                 </div>
             )}
-        </form>
+        </SweetFactoryStyles>
     );
 };
 
