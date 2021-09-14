@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { authService } from 'fbase';
+import React, { useEffect, useState } from 'react';
+import { authService, dbService } from 'fbase';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import Sweet from 'components/Sweet';
 
 const ProfileStyles = styled.div`
     width: 100%;
@@ -13,7 +14,8 @@ const ProfileStyles = styled.div`
         display: flex;
         flex-direction: column; 
         border-bottom: 1px solid rgba(255, 255, 255, 0.9);
-        padding-bottom: 30px; 
+        padding-bottom: 3rem;
+        margin-bottom: 3rem; 
     }
     .formInput {
         width: 100%;
@@ -44,11 +46,26 @@ const Profile = ({ userObj, refreshUser }) => {
     //리다이렉트 
     const history = useHistory()
     const [newDisplayName, setNewDisplayName] = useState(userObj.displayName)
+    const [userSweets, setUserSweets] = useState([])
 
     const onLogOutClick = () => {
         authService.signOut()
         history.push('/') //로그아웃시 처음 화면으로 이동
     }
+
+    const getMySweets = async () => {
+        const sweets = await dbService
+        .collection("sweets")
+        .where("creatorId", "==", userObj.uid)
+        .orderBy("createdAt", "asc")
+        .get()
+
+        setUserSweets(sweets.docs.map(doc => doc.data()))
+    }
+
+    useEffect(() => {
+        getMySweets()
+    },[])
 
     const onChange = (e) => {
         const { value } = e.target 
@@ -76,6 +93,13 @@ const Profile = ({ userObj, refreshUser }) => {
                 />
                 <input type="submit" value="Update Profile" className="formBtn"/>
             </form>
+            <ul>
+                { userSweets.map((sweet, index) => {
+                    return (
+                        <Sweet key={index} {...sweet} userObj={userObj}/>
+                    )
+                })}
+            </ul>
             <span className="formBtn logOut" onClick={onLogOutClick}>Log Out</span>
         </ProfileStyles>
     );
