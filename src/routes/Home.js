@@ -38,6 +38,7 @@ const Home = ({ userObj }) => {
                     key={sweet.id} 
                     {...sweet}
                     isOwner={sweet.creatorId === userObj.uid}
+                    userObj={userObj}
                     //작성한 유저만에 삭제, 수정 가능하도록
                     />
                 ))}

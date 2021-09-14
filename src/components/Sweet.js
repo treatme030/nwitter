@@ -43,6 +43,13 @@ const SweetStyles = styled.div`
     .cancelBtn {
         background-color: tomato;
     }
+    .sweet_name {
+        position: absolute;
+        top: 3px;
+        left: 2rem;
+        color: #04aaff;
+        font-size: 1rem;
+    }
     img {
         position: absolute;
         right: -10px;
@@ -63,9 +70,15 @@ const SweetStyles = styled.div`
     }
 `;
 
-const Sweet = ({ id, text, attachmentUrl, isOwner }) => {
+const Sweet = ({ id, text, attachmentUrl, createdAt, isOwner, userObj }) => {
     const [editing, setEditing] = useState(false)
     const [newSweet, setNewSweet] = useState(text)
+
+    const date = new Date(createdAt)
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const createdate = `${year}.${month}.${day}`
 
     const onDeleteClick = async () => {
         const ok = window.confirm('삭제하시겠습니까?')//boolean 값 반환 
@@ -109,6 +122,7 @@ const Sweet = ({ id, text, attachmentUrl, isOwner }) => {
                 </>
             ) : (
                 <>
+                    <span className="sweet_name">{userObj.displayName} {createdate}</span>
                     <h4>{text}</h4>
                     { attachmentUrl && (
                         <img src={attachmentUrl}/>
