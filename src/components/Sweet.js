@@ -122,7 +122,6 @@ const Sweet = ({ id, text, attachmentUrl, createdAt, isOwner, userObj }) => {
                 </>
             ) : (
                 <>
-                    <span className="sweet_name">{userObj.displayName} {createdate}</span>
                     <h4>{text}</h4>
                     { attachmentUrl && (
                         <img src={attachmentUrl}/>
