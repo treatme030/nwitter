@@ -1,4 +1,5 @@
 import AuthForm from "components/AuthForm";
+import Covid19 from "components/Covid19";
 import { authService, firebaseInstance } from "fbase";
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
@@ -61,6 +62,7 @@ const Auth = () => {
                    Continue with Github <FaGithub/>
                 </button>
            </div>
+           <Covid19/>
         </AuthStyles>
     );
 };

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Sweet from 'components/Sweet';
 import SweetFactory from 'components/SweetFactory';
 import styled from 'styled-components';
+import Covid19 from 'components/Covid19';
 
 const HomeStyles = styled.div`
     width: 100%;
@@ -43,6 +44,7 @@ const Home = ({ userObj }) => {
                     />
                 ))}
             </div>
+            <Covid19/>
         </HomeStyles>
     );
 };

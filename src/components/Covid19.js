@@ -1,57 +1,71 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Covid19Styles = styled.section`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 2rem;
+    .covid_text {
+        color: tomato;
+    }
+`;
+
+const API_KEY = `5b0F6eLuRqzepcbIIpbyzM59z%2B4rjt706hQ9Xv8frg97OKAelP2BoGUrjwF9bJg29xoytPMuCppi8XOsWaUBWw%3D%3D`
+const url = `http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${API_KEY}&startCreateDt=20210115&endCreateDt=20210916`
 
 const Covid19 = () => {
-    const [confirmedData, setComfirmedData] = useState({})
+    const [covidInfo, setCovidInfo] = useState({})
 
-    const getData = async () => {
-        const res = await axios('https://api.covid19api.com/dayone/country/south-korea')
-        makeData(res.data)
-    }
-
-    const makeData = (items) => {
-        const arr = items.map((item) => {
-            const currentDate = new Date(item.Date)
+    const fetchData = async () => {
+        const res = await axios.get(url)
+        const data = res.data.response.body.items.item
+        const covidLists = data.map((list) => {
+            const currentDate = new Date(list.createDt)
             const year = currentDate.getFullYear()
             const month = currentDate.getMonth() + 1
-            const date = currentDate.getDate()
-            const confirmed = item.Confirmed
-            const active = item.Active
-            const death = item.Deaths
-            const id = item.ID
+            const day = currentDate.getDate()
+            const { decideCnt, deathCnt} = list 
 
-            item = { id, year, month, date, confirmed, active, death }
-            return item;
-        }).filter((item) => {
+            return(
+                {
+                    decideCnt,
+                    deathCnt,
+                    year,
+                    month,
+                    day
+                }
+            )
+        }).filter((list) => {
             const today = new Date()
             const year = today.getFullYear()
-            const month = today.getMonth()
-            const date = today.getDate()
-            return item.year === year && item.month === month && item.date === date
+            const month = today.getMonth() + 1 
+            const day = today.getDate()
+            return list.year === year && list.month === month && list.day === day
         })
-        setComfirmedData(...arr)
+        setCovidInfo(...covidLists)
+        //decideCnt총 확진자 , deathCnt, stateDt
     }
 
     useEffect(() => {
-        getData()
+        fetchData()
     },[])
 
-    const { active, confirmed, death } = confirmedData
+    const { decideCnt, deathCnt } = covidInfo
     return (
-        <section>
-            <h3><span style={{color: 'tomato'}}>COVID-19</span> 현재 상황</h3>
+        <Covid19Styles>
+            <h3><span className="covid_text">COVID-19</span> 현재 상황</h3>
             <ul>
                 <li>
-                    <span>발생자: {active}명</span>
+                    <span>누적확진자: {decideCnt}명</span>
                 </li>
                 <li>
-                    <span>누적확진자: {confirmed}명</span>
-                </li>
-                <li>
-                    <span>사망자: {death}명</span>
+                    <span>사망자: {deathCnt}명</span>
                 </li>
             </ul>
-        </section>
+        </Covid19Styles>
     );
 };
 
