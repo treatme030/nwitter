@@ -14,7 +14,7 @@ const Covid19Styles = styled.section`
 `;
 
 const API_KEY = `5b0F6eLuRqzepcbIIpbyzM59z%2B4rjt706hQ9Xv8frg97OKAelP2BoGUrjwF9bJg29xoytPMuCppi8XOsWaUBWw%3D%3D`
-const url = `http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${API_KEY}&startCreateDt=20210115&endCreateDt=20210916`
+const url = `http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${API_KEY}&startCreateDt=20210901&endCreateDt=20210916`
 
 const Covid19 = () => {
     const [covidInfo, setCovidInfo] = useState({})
