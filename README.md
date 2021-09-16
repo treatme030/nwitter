@@ -1,4 +1,5 @@
 # 🍬 Switter 
 Twitter (mini)Clone with React and Firebase
 
-![switter](https://user-images.githubusercontent.com/74355328/132712310-310addb4-d175-4bf3-ae58-05a7b2259d03.png)
+![switter-covid](https://user-images.githubusercontent.com/74355328/133549504-5e3e09e2-ab32-4e7f-8ce0-949da7e55904.png)
+
