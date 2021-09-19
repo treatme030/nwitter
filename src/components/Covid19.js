@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+require('dotenv').config()
 
 const Covid19Styles = styled.section`
     display: flex;
@@ -13,40 +14,28 @@ const Covid19Styles = styled.section`
     }
 `;
 
-const API_KEY = `5b0F6eLuRqzepcbIIpbyzM59z%2B4rjt706hQ9Xv8frg97OKAelP2BoGUrjwF9bJg29xoytPMuCppi8XOsWaUBWw%3D%3D`
-const url = `http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${API_KEY}&startCreateDt=20210901&endCreateDt=20210916`
+const apiKey = process.env.REACT_APP_COVID_API_KEY
+const covidUrl = process.env.REACT_APP_COVID_URL
 
 const Covid19 = () => {
     const [covidInfo, setCovidInfo] = useState({})
 
     const fetchData = async () => {
-        const res = await axios.get(url)
-        const data = res.data.response.body.items.item
-        const covidLists = data.map((list) => {
-            const currentDate = new Date(list.createDt)
-            const year = currentDate.getFullYear()
-            const month = currentDate.getMonth() + 1
-            const day = currentDate.getDate()
-            const { decideCnt, deathCnt} = list 
+        const today = new Date()
+        const year = today.getFullYear()
+        const month = today.getMonth() + 1
+        const day = today.getDate()
+        const date = year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
 
-            return(
-                {
-                    decideCnt,
-                    deathCnt,
-                    year,
-                    month,
-                    day
-                }
-            )
-        }).filter((list) => {
-            const today = new Date()
-            const year = today.getFullYear()
-            const month = today.getMonth() + 1 
-            const day = today.getDate()
-            return list.year === year && list.month === month && list.day === day
-        })
-        setCovidInfo(...covidLists)
-        //decideCnt총 확진자 , deathCnt, stateDt
+        //브라우저의 CORS 이슈 해결하기 위해 'https://cors-anywhere.herokuapp.com/' 사용 
+        //Response Headers에 Access-Control-Allow-Origin:*가 생성되어 응답 이루어짐 
+        //당일 데이터만 가져오기
+        const url = `https://cors-anywhere.herokuapp.com/${covidUrl}serviceKey=${apiKey}&startCreateDt=${date}&endCreateDt=${date}`
+        const response = await axios.get(url)
+        const { decideCnt, deathCnt} = response.data.response.body.items.item
+        const covidItem = { decideCnt, deathCnt}
+       
+        setCovidInfo(covidItem)
     }
 
     useEffect(() => {
