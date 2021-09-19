@@ -14,9 +14,6 @@ const Covid19Styles = styled.section`
     }
 `;
 
-const apiKey = process.env.REACT_APP_COVID_API_KEY
-const covidUrl = process.env.REACT_APP_COVID_URL
-
 const Covid19 = () => {
     const [covidInfo, setCovidInfo] = useState({})
 
@@ -25,33 +22,40 @@ const Covid19 = () => {
         const year = today.getFullYear()
         const month = today.getMonth() + 1
         const day = today.getDate()
-        const date = year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
-
-        //브라우저의 CORS 이슈 해결하기 위해 'https://cors-anywhere.herokuapp.com/' 사용 
-        //Response Headers에 Access-Control-Allow-Origin:*가 생성되어 응답 이루어짐 
-        //당일 데이터만 가져오기
-        const url = `https://cors-anywhere.herokuapp.com/${covidUrl}serviceKey=${apiKey}&startCreateDt=${date}&endCreateDt=${date}`
+        const currentDate = year + (month < 10 ? `-0${month}` : `-${month}`) + (day < 10 ? `-0${day}` : `-${day}`)
+        
+        const url = 'https://api.covid19api.com/live/country/south-korea/status/confirmed'
         const response = await axios.get(url)
-        const { decideCnt, deathCnt} = response.data.response.body.items.item
-        const covidItem = { decideCnt, deathCnt}
-       
-        setCovidInfo(covidItem)
+
+        const covidItem = response.data.map((list) => {
+            return (
+                {
+                    Confirmed: list.Confirmed,
+                    Date: list.Date,
+                    Deaths: list.Deaths,
+                }
+            )
+        }).filter((item) => {
+            const covidDate = item.Date.slice(0, 10)
+            return covidDate === currentDate
+        })
+        setCovidInfo(covidItem[0])
     }
 
     useEffect(() => {
         fetchData()
     },[])
 
-    const { decideCnt, deathCnt } = covidInfo
+    const { Confirmed, Deaths } = covidInfo
     return (
         <Covid19Styles>
             <h3><span className="covid_text">COVID-19</span> 현재 상황</h3>
             <ul>
                 <li>
-                    <span>누적확진자: {decideCnt}명</span>
+                    <span>누적확진자: {Confirmed}명</span>
                 </li>
                 <li>
-                    <span>사망자: {deathCnt}명</span>
+                    <span>사망자: {Deaths}명</span>
                 </li>
             </ul>
         </Covid19Styles>
