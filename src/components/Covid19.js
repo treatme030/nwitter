@@ -22,40 +22,32 @@ const Covid19 = () => {
         const year = today.getFullYear()
         const month = today.getMonth() + 1
         const day = today.getDate()
-        const currentDate = year + (month < 10 ? `-0${month}` : `-${month}`) + (day < 10 ? `-0${day}` : `-${day}`)
+        const currentDate = year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
         
-        const url = 'https://api.covid19api.com/live/country/south-korea/status/confirmed'
-        const response = await axios.get(url)
-
-        const covidItem = response.data.map((list) => {
-            return (
-                {
-                    Confirmed: list.Confirmed,
-                    Date: list.Date,
-                    Deaths: list.Deaths,
-                }
-            )
-        }).filter((item) => {
-            const covidDate = item.Date.slice(0, 10)
-            return covidDate === currentDate
-        })
-        setCovidInfo(covidItem[0])
+        const apiKey = process.env.REACT_APP_COVID_API_KEY
+        //리액트 앱의 proxy 사용 
+        const url = `/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${apiKey}&startCreateDt=${currentDate}&endCreateDt=${currentDate}`
+        
+        const res = await axios.get(url)
+        const covidItem = res.data.response.body
+        
+        setCovidInfo(covidItem.items.item)
     }
 
     useEffect(() => {
         fetchData()
     },[])
 
-    const { Confirmed, Deaths } = covidInfo
+    const { decideCnt, deathCnt } = covidInfo
     return (
         <Covid19Styles>
             <h3><span className="covid_text">COVID-19</span> 현재 상황</h3>
             <ul>
                 <li>
-                    <span>누적확진자: {Confirmed}명</span>
+                    <span>누적확진자: {decideCnt}명</span>
                 </li>
                 <li>
-                    <span>사망자: {Deaths}명</span>
+                    <span>사망자: {deathCnt}명</span>
                 </li>
             </ul>
         </Covid19Styles>
