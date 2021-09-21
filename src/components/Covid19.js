@@ -25,13 +25,15 @@ const Covid19 = () => {
         const currentDate = year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
         
         const apiKey = process.env.REACT_APP_COVID_API_KEY
-        //리액트 앱의 proxy 사용 
-        const url = `/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${apiKey}&startCreateDt=${currentDate}&endCreateDt=${currentDate}`
+        const url = `https://cors-anywhere.herokuapp.com/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${apiKey}&startCreateDt=${currentDate}&endCreateDt=${currentDate}`
         
-        const res = await axios.get(url)
-        const covidItem = res.data.response.body
-        
-        setCovidInfo(covidItem.items.item)
+        try {
+            const res = await axios.get(url)
+            const covidItem = await res.data.response.body
+            setCovidInfo(covidItem.items.item)
+        } catch(error){
+            console.log(error.message)
+        }
     }
 
     useEffect(() => {
