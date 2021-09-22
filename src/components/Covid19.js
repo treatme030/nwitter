@@ -25,12 +25,12 @@ const Covid19 = () => {
         const currentDate = year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
         
         const apiKey = process.env.REACT_APP_COVID_API_KEY
-        const url = `https://cors-anywhere.herokuapp.com/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${apiKey}&startCreateDt=${currentDate}&endCreateDt=${currentDate}`
+        const url = `https://cors.bridged.cc/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${apiKey}&startCreateDt=20210901&endCreateDt=${currentDate}`
         
         try {
             const res = await axios.get(url)
-            const covidItem = await res.data.response.body
-            setCovidInfo(covidItem.items.item)
+            const covidItem = await res.data.response.body.items.item[0]
+            setCovidInfo(covidItem)
         } catch(error){
             console.log(error.message)
         }
