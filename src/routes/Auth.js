@@ -1,5 +1,6 @@
 import AuthForm from "components/AuthForm";
 import Covid19 from "components/Covid19";
+import MapInfo from "components/MapInfo";
 import { authService, firebaseInstance } from "fbase";
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
@@ -63,6 +64,7 @@ const Auth = () => {
                 </button>
            </div>
            <Covid19/>
+           <MapInfo/>
         </AuthStyles>
     );
 };
