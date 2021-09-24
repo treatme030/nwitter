@@ -1,5 +1,6 @@
 import { dbService } from 'fbase';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Sweet from 'components/Sweet';
 import SweetFactory from 'components/SweetFactory';
 import styled from 'styled-components';
@@ -45,6 +46,9 @@ const Home = ({ userObj }) => {
                 ))}
             </div>
             <Covid19/>
+           <Link to="/covid_map" className="covid_region">
+               <button>코로나 지역별 현재상황 알아보기</button> 
+            </Link>
         </HomeStyles>
     );
 };
