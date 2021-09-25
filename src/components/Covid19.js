@@ -5,10 +5,9 @@ require('dotenv').config()
 
 const Covid19Styles = styled.section`
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 4rem;
-    margin-top: 2rem;
+    justify-content: space-between;
+    margin-bottom: 2rem;
     .covid_text {
         color: tomato;
     }

@@ -1,15 +1,13 @@
 import { authService, firebaseInstance } from "fbase";
-import { Link } from 'react-router-dom';
 import { FaTwitter, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import AuthForm from "components/AuthForm";
-import Covid19 from "components/Covid19";
 import styled from "styled-components";
 
 const AuthStyles = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    /* height: 100vh; */
     justify-content: center;
     align-items: center;
     .icon_twitter {
@@ -63,10 +61,6 @@ const Auth = () => {
                    Continue with Github <FaGithub/>
                 </button>
            </div>
-           <Covid19/>
-           <Link to="/covid_map" className="covid_region">
-               <button>코로나 지역별 현재상황 알아보기</button> 
-            </Link>
         </AuthStyles>
     );
 };

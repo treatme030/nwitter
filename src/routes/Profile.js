@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { authService, dbService } from 'fbase';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Sweet from 'components/Sweet';
-import Covid19 from 'components/Covid19';
 
 const ProfileStyles = styled.div`
     width: 100%;
@@ -102,10 +101,6 @@ const Profile = ({ userObj, refreshUser }) => {
                 })}
             </ul>
             <span className="formBtn logOut" onClick={onLogOutClick}>Log Out</span>
-            <Covid19/>
-            <Link to="/covid_map" className="covid_region">
-               <button>코로나 지역별 현재상황 알아보기</button> 
-            </Link>
         </ProfileStyles>
     );
 };

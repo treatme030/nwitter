@@ -4,6 +4,7 @@ import { FaTwitter, FaUser } from 'react-icons/fa';
 import styled from 'styled-components';
 
 const NavigationStyles = styled.nav`
+    margin-bottom: 2rem;
     ul {
         display: flex;
         justify-content: center;

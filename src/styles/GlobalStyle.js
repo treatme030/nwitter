@@ -37,20 +37,6 @@ const  GlobalStyles = createGlobalStyle`
     form {
         width: 100%;
     }
-    .covid_region {
-        margin-top: 2rem;
-        button {
-            background-color: transparent;
-            border: 1px solid tomato;
-            color: #fff;
-            padding: 1rem;
-            border-radius: 10px;
-            transition: 0.4s;
-            &:hover {
-                background-color: tomato;
-            }
-        }
-    }
 `;
 
 export default GlobalStyles;

@@ -168,6 +168,7 @@ const SweetFactory = ({ userObj }) => {
                     <img 
                     src={attachment} 
                     style={{ backgroundImage: attachment }}
+                    alt="배경이미지"
                     />
                     <div className="factoryForm_clear" onClick={onClearAttachment}>
                         <span>Remove</span>
