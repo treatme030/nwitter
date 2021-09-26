@@ -8,7 +8,6 @@ const NavigationStyles = styled.nav`
     ul {
         display: flex;
         justify-content: center;
-        margin-top: 5rem;
         .nav_home {
             margin-right: 1rem;
         }
