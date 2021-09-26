@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 const MapCovidInfoStyles = styled.div`
     width: 100%;
-    max-width: 400px;
     color: black;
-    h1 {
+    h3 {
         margin-bottom: 2rem;
         color: #fff;
         span {
@@ -13,9 +12,12 @@ const MapCovidInfoStyles = styled.div`
         }
     }
     #map {
-        width: 400px;
+        width: 100%;
         height: 400px;
         border-radius: 10px;
+    }
+    @media screen and (max-width: 1580px){
+        max-width: 320px
     }
 `;
 
@@ -33,8 +35,8 @@ const MapCovidInfo = () => {
 
         // 버튼을 클릭하면 아래 배열의 좌표들이 모두 보이게 지도 범위를 재설정합니다 
         let points = [
-            new kakao.maps.LatLng(37.566653, 126.978413),
-            new kakao.maps.LatLng(33.452671, 126.574792),
+            new kakao.maps.LatLng(37.48740382975868, 130.9057794769368),
+            new kakao.maps.LatLng(37.6658724920564, 125.69498504428952),
             new kakao.maps.LatLng(33.489977380111256, 126.5001984944947)
         ];
 
@@ -124,6 +126,10 @@ const MapCovidInfo = () => {
                 content: `제주도`,
                 latlng: new kakao.maps.LatLng(33.489977380111256, 126.5001984944947)
             },
+            {
+                content: `울릉도`,
+                latlng: new kakao.maps.LatLng(37.48740382975868, 130.9057794769368)
+            },
         ];
 
         for (let i = 0; i < positions.length; i ++) {
@@ -156,7 +162,7 @@ const MapCovidInfo = () => {
 
     return (
         <MapCovidInfoStyles>
-            <h1><span>COVID-19</span> 지역별 현재상황</h1>
+            <h3><span>COVID-19</span> 지역별 현재상황</h3>
             <div id="map"></div>
         </MapCovidInfoStyles>
     );

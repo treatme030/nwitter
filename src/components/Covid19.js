@@ -11,6 +11,10 @@ const Covid19Styles = styled.section`
     .covid_text {
         color: tomato;
     }
+    @media screen and (max-width: 1580px){
+        width: 100%;
+        max-width: 320px;
+    }
 `;
 
 const Covid19 = () => {

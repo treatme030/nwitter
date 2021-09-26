@@ -6,17 +6,19 @@ import Navigation from './Navigation';
 import styled from 'styled-components';
 import MapCovidInfo from 'components/MapCovidInfo';
 import Covid19 from './Covid19';
+import SearchVclip from './SearchVclip';
 
 const RouterStyles = styled.div`
     display: flex;
     justify-content: center;
     width: 60%;
     margin: 5rem auto;
+    gap: 4rem;
     .serch {
         flex: 1;
     }
     .container {
-        flex: 1.5;
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -31,6 +33,10 @@ const RouterStyles = styled.div`
         width: 490px;
         .covid_info {
             order: 2;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     }
 `;
@@ -66,7 +72,9 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
                 </Switch>
                 </div>
             </Router>
-            <div className="serch">검색키워드</div>
+            <div className="serch">
+                <SearchVclip/>
+            </div>
         </RouterStyles>
     );
 };
