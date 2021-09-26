@@ -40,12 +40,19 @@ const SearchVclip = () => {
     const [clipList, setClipList] = useState([])
 
     const getData = async () => {
-    
-        const res = await axios.get(`https://dapi.kakao.com/v2/search/vclip?sort=recency&query=${searchText}&size=8`, {headers: {
-            'Authorization': `KakaoAK 02477af3acbf4464ea0dab3efe375cba`
+        const api = process.env.REACT_APP_SEARCH_API_KEY
+
+        const res = await axios.get(`https://dapi.kakao.com/v2/search/vclip?sort=recency&query=${searchText}&size=5`, {headers: {
+            'Authorization': `KakaoAK ${api}`
         }})
         setClipList(res.data.documents)
         setShowClip(true)
+    }
+
+    const keyPressHandler = (e) => {
+        if(e.key === 'Enter'){
+            getData()
+        }
     }
 
     useEffect(() => {
@@ -59,7 +66,12 @@ const SearchVclip = () => {
 
     return (
         <SearchVclipStyles>
-            <input type="text" placeholder="키워드를 입력하세요." value={searchText} onChange={changeHandler}/>
+            <input type="text" 
+            placeholder="youtube 검색 키워드를 입력하세요." 
+            value={searchText} 
+            onChange={changeHandler} 
+            onKeyPress={keyPressHandler}
+            />
             <button onClick={getData}>
                 <FiSearch size="3ex"/>
             </button>

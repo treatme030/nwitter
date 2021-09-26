@@ -7,6 +7,7 @@ const VclipStyles = styled.section`
         padding: 1rem 1rem 1rem 0;
         margin: 2rem 2rem 2rem 0;
         img {
+            flex: 1;
             margin-right: 0.5rem;
         }
         .context_info {
