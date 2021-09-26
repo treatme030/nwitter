@@ -6,28 +6,9 @@ import styled from 'styled-components';
 
 const SearchVclipStyles = styled.div`
     position: relative;
-    input {
+    .search_input {
         width: 100%;
         margin-bottom: 3rem;
-        height: 40px;
-        padding: 0 2rem;
-        color: #fff;
-        border: 1px solid #04aaff;
-        border-radius: 20px;
-        font-weight: 500;
-        font-size: 1.2rem;
-    }
-    button {
-        position: absolute;
-        right: 0;
-        background-color: #04aaff;
-        height: 40px;
-        width: 40px;
-        padding: 1rem 0;
-        text-align: center;
-        border-radius: 20px;
-        color: #fff;
-        cursor: pointer;
     }
     @media screen and (max-width: 1580px){
         max-width: 320px
@@ -66,13 +47,15 @@ const SearchVclip = () => {
 
     return (
         <SearchVclipStyles>
-            <input type="text" 
+            <input 
+            className="blue_border_input search_input"
+            type="text" 
             placeholder="youtube 검색 키워드를 입력하세요." 
             value={searchText} 
             onChange={changeHandler} 
             onKeyPress={keyPressHandler}
             />
-            <button onClick={getData}>
+            <button className="blue_button" onClick={getData}>
                 <FiSearch size="3ex"/>
             </button>
             { showClip && (

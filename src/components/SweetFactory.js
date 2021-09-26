@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { dbService, storageService } from 'fbase';
 import { v4 as uuidv4 } from 'uuid';
 import { FaPlus, FaTimes } from 'react-icons/fa'
@@ -19,25 +19,6 @@ const SweetFactoryStyles = styled.form`
         width: 100%;
         .factoryInput_input {
             flex-grow: 1;
-            height: 40px;
-            padding: 0 2rem;
-            color: #fff;
-            border: 1px solid #04aaff;
-            border-radius: 20px;
-            font-weight: 500;
-            font-size: 1.2rem;
-        }
-        .factoryInput_arrow {
-            position: absolute;
-            right: 0;
-            background-color: #04aaff;
-            height: 40px;
-            width: 40px;
-            padding: 1rem 0;
-            text-align: center;
-            border-radius: 20px;
-            color: #fff;
-            cursor: pointer;
         }
     }
     .factory_label {
@@ -88,7 +69,11 @@ const SweetFactory = ({ userObj }) => {
     const [sweet, setSweet] = useState('')
     //URL 상태관리
     const [attachment, setAttachment] = useState('')
+    const inputValue = useRef(null)
 
+    useEffect(() => {
+        inputValue.current.focus()
+    },[])
     const onChange = (e) => {
         const { value } = e.target
         setSweet(value)
@@ -97,6 +82,7 @@ const SweetFactory = ({ userObj }) => {
     //firestore에 데이터 저장하기
     const onSubmit = async (e) => {
         e.preventDefault()
+
         if(sweet === ''){
             return;
         }
@@ -148,10 +134,11 @@ const SweetFactory = ({ userObj }) => {
                 placeholder="What's on your mind?" 
                 maxLength={120}
                 value={sweet}
+                ref={inputValue}
                 onChange={onChange}
-                className="factoryInput_input"
+                className="blue_border_input factoryInput_input"
                 />
-                <input type="submit" value="&rarr;" className="factoryInput_arrow"/>
+                <input type="submit" value="&rarr;" className="blue_button"/>
             </div>
             <label htmlFor="attach-file" className="factory_label">
                 <span>Add photos</span>
