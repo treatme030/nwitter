@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const MapCovidInfoStyles = styled.div`
@@ -22,9 +23,25 @@ const MapCovidInfoStyles = styled.div`
 `;
 
 const MapCovidInfo = () => {
+    const [sidoCovidArr, setSidoCovidArr] = useState([])
+    const getData = async () => {
+        const today = new Date()
+        const year = today.getFullYear()
+        const month = today.getMonth() + 1
+        const day = today.getDate()
+        const currentDate = year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
+
+        const apiKey = process.env.REACT_APP_COVID_API_KEY
+        const url = `https://cors.bridged.cc/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=${apiKey}&startCreateDt=20210901&endCreateDt=${currentDate}`
+    
+        const res = await axios.get(url)
+        const arr = res.data.response.body.items.item.slice(1, 18)
+        setSidoCovidArr([...arr])
+    }
 
     const { kakao } = window
     useEffect(() => {
+        getData()
         const container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
         const options = { //지도를 생성할 때 필요한 기본 옵션
             center: new kakao.maps.LatLng(37.566653, 126.978413), //지도의 중심좌표.
@@ -67,80 +84,83 @@ const MapCovidInfo = () => {
         // 마커를 표시할 위치와 title 객체 배열입니다 
         let positions = [
             {
-                content: `서울`,
-                latlng: new kakao.maps.LatLng(37.566653, 126.978413)
+                content: `제주도`,
+                latlng: new kakao.maps.LatLng(33.489977380111256, 126.5001984944947)
             },
             {
-                content: `인천`,
-                latlng: new kakao.maps.LatLng(37.456104873895136, 126.70588638718482)
-            },
-            {
-                content: `경기도`,
-                latlng: new kakao.maps.LatLng(37.27507722658434, 127.00916864083456)
-            },
-            {
-                content: `강릉`,
-                latlng: new kakao.maps.LatLng(37.75214937260467, 128.87598458501782)
-            },
-            {
-                content: `세종`,
-                latlng: new kakao.maps.LatLng(36.480304412943376, 127.28877552733007)
-            },
-            {
-                content: `대전`,
-                latlng: new kakao.maps.LatLng(36.35063814232123, 127.38473286781019)
-            },
-            {
-                content: `전주`,
-                latlng: new kakao.maps.LatLng(35.82438456047146, 127.14801122732177)
-            },
-            {
-                content: `광주`,
-                latlng: new kakao.maps.LatLng(35.16024323514698, 126.85147579847768)
-            },
-            {
-                content: `충주`,
-                latlng: new kakao.maps.LatLng(36.9925629912894, 127.9255784951379)
+                content: `창원`,
+                latlng: new kakao.maps.LatLng(35.238316768933984, 128.6924301850832)
+            },            {
+                content: `포항`,
+                latlng: new kakao.maps.LatLng(36.019363811486876, 129.34324465431195)
             },
             {
                 content: `목포`,
                 latlng: new kakao.maps.LatLng(34.812031680410634, 126.39216578313166)
             },
             {
-                content: `대구`,
-                latlng: new kakao.maps.LatLng(35.87155237694022, 128.60176082732227)
+                content: `전주`,
+                latlng: new kakao.maps.LatLng(35.82438456047146, 127.14801122732177)
+            },
+            {
+                content: `천안`,
+                latlng: new kakao.maps.LatLng(36.815369177678996, 127.11382952557865)
+            },
+            {
+                content: `충주`,
+                latlng: new kakao.maps.LatLng(36.9925629912894, 127.9255784951379)
+            },
+            {
+                content: `강릉`,
+                latlng: new kakao.maps.LatLng(37.75214937260467, 128.87598458501782)
+            },
+            {
+                content: `경기도`,
+                latlng: new kakao.maps.LatLng(37.27507722658434, 127.00916864083456)
+            },
+            {
+                content: `세종`,
+                latlng: new kakao.maps.LatLng(36.480304412943376, 127.28877552733007)
             },
             {
                 content: `울산`,
                 latlng: new kakao.maps.LatLng(35.546076074232346, 129.3110561054897)
             },
             {
-                content: `포항`,
-                latlng: new kakao.maps.LatLng(36.019363811486876, 129.34324465431195)
+                content: `대전`,
+                latlng: new kakao.maps.LatLng(36.35063814232123, 127.38473286781019)
+            },
+            {
+                content: `광주`,
+                latlng: new kakao.maps.LatLng(35.16024323514698, 126.85147579847768)
+            },
+            {
+                content: `인천`,
+                latlng: new kakao.maps.LatLng(37.456104873895136, 126.70588638718482)
+            },
+            {
+                content: `대구`,
+                latlng: new kakao.maps.LatLng(35.87155237694022, 128.60176082732227)
             },
             {
                 content: `부산`,
                 latlng: new kakao.maps.LatLng(35.17992415245297, 129.07496758980167)
             },
             {
-                content: `제주도`,
-                latlng: new kakao.maps.LatLng(33.489977380111256, 126.5001984944947)
-            },
-            {
-                content: `울릉도`,
-                latlng: new kakao.maps.LatLng(37.48740382975868, 130.9057794769368)
+                content: `서울`,
+                latlng: new kakao.maps.LatLng(37.566653, 126.978413)
             },
         ];
-
+        
         for (let i = 0; i < positions.length; i ++) {
-                        
+                       
             // 마커를 생성합니다
             let marker = new kakao.maps.Marker({
                 map: map, // 마커를 표시할 지도
                 position: positions[i].latlng, // 마커를 표시할 위치
             });
             let infowindow = new kakao.maps.InfoWindow({
-                content: positions[i].content + ` 확진자수: 0명`// 인포윈도우에 표시할 내용
+                content: positions[i].content + `/ 전일대비 증감수: ${sidoCovidArr[i].incDec}명`// 인포윈도우에 표시할 내용
             });
             kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
             kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
