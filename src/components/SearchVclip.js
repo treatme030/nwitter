@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import Vclip from './Vclip';
 import { FiSearch } from 'react-icons/fi'
@@ -20,8 +20,8 @@ const SearchVclip = () => {
     const [showClip, setShowClip] = useState(false)
     const [clipList, setClipList] = useState([])
 
+    const api = process.env.REACT_APP_SEARCH_API_KEY
     const getData = async () => {
-        const api = process.env.REACT_APP_SEARCH_API_KEY
 
         const res = await axios.get(`https://dapi.kakao.com/v2/search/vclip?sort=recency&query=${searchText}&size=5`, {headers: {
             'Authorization': `KakaoAK ${api}`
@@ -37,8 +37,16 @@ const SearchVclip = () => {
     }
 
     useEffect(() => {
-        getData()
-    },[])
+        const initData = async () => {
+
+            const res = await axios.get(`https://dapi.kakao.com/v2/search/vclip?sort=recency&query=인기동영상&size=5`, {headers: {
+                'Authorization': `KakaoAK ${api}`
+            }})
+            setClipList(res.data.documents)
+            setShowClip(true)
+        }
+        initData()
+    },[api])
 
     const changeHandler = (e) => {
         const { value } = e.target 
