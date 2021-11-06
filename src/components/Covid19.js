@@ -25,13 +25,18 @@ const Covid19 = () => {
         const year = today.getFullYear()
         const month = today.getMonth() + 1
         const day = today.getDate()
-        const currentDate = year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
+        const currentDate = '' + year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
         
         const apiKey = process.env.REACT_APP_COVID_API_KEY
         const url = `https://cors.bridged.cc/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${apiKey}&startCreateDt=20210901&endCreateDt=${currentDate}`
         
         try {
-            const res = await axios.get(url)
+            const res = await axios.get(url, {
+                headers: {
+                    'x-cors-grida-api-key': '4e2ca3b7-6d97-4457-9b5f-ec5b4c7ace28',
+                    'Content-Type': 'application/json'
+                }
+            })
             const covidItem = await res.data.response.body.items.item[0]
             setCovidInfo(covidItem)
         } catch(error){

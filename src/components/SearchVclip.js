@@ -23,7 +23,8 @@ const SearchVclip = () => {
     const api = process.env.REACT_APP_SEARCH_API_KEY
     const getData = async () => {
 
-        const res = await axios.get(`https://dapi.kakao.com/v2/search/vclip?sort=recency&query=${searchText}&size=5`, {headers: {
+        const res = await axios.get(`https://dapi.kakao.com/v2/search/vclip?sort=recency&query=${searchText}&size=5`, 
+        {headers: {
             'Authorization': `KakaoAK ${api}`
         }})
         setClipList(res.data.documents)

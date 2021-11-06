@@ -37,7 +37,12 @@ const MapCovidInfo = () => {
     useEffect(() => {
         const sidoData = async () => {
             try {
-                const response = await axios.get(url)
+                const response = await axios.get(url, {
+                    headers: {
+                        'x-cors-grida-api-key': '4e2ca3b7-6d97-4457-9b5f-ec5b4c7ace28',
+                        'Content-Type': 'application/json'
+                    }
+                })
                 const itemList = await response.data.response.body.items.item
                 const sidoList = await itemList.slice(1, 18) 
                 const newSidoList = sidoList.map((item) => {
