@@ -1,8 +1,11 @@
 # 🍬 Switter 
 Twitter (mini)Clone with React and Firebase
 
-### login page
-![switter-covid](https://user-images.githubusercontent.com/74355328/133549504-5e3e09e2-ab32-4e7f-8ce0-949da7e55904.png)
+### login
+![Screenshot from 2021-11-06 17-10-21](https://user-images.githubusercontent.com/74355328/140602911-c095bbe8-a3f1-48fb-b3cc-0ae6ea067996.png)
 
-### home page
-![switter-home](https://user-images.githubusercontent.com/74355328/133550186-bef9c114-0e2b-43ed-8755-3e20ae044451.png)
+### covid
+![Screenshot from 2021-11-06 17-09-47](https://user-images.githubusercontent.com/74355328/140602904-6fda6fba-85dd-4144-891f-051bc47b0054.png)
+
+### search
+![Screenshot from 2021-11-06 17-10-06](https://user-images.githubusercontent.com/74355328/140602914-7a9f1ac9-c90f-46da-8719-42bf85a338c5.png)
