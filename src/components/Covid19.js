@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import date from 'lib/date';
-require('dotenv').config()
+import dotenv from 'dotenv';
+dotenv.config();
 
 const Covid19Styles = styled.section`
     display: flex;
@@ -24,13 +25,14 @@ const Covid19 = () => {
     const fetchData = async () => {
         const currentDate = date()
         
-        const apiKey = process.env.REACT_APP_COVID_API_KEY
-        const url = `https://cors.bridged.cc/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${apiKey}&startCreateDt=20210901&endCreateDt=${currentDate}`
+        const covidAPI = process.env.REACT_APP_COVID_API_KEY
+        const corsAPI = process.env.REACT_APP_CORS_GRIDA_API_KEY
+        const url = `https://cors.bridged.cc/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${covidAPI}&startCreateDt=20210901&endCreateDt=${currentDate}`
         
         try {
             const res = await axios.get(url, {
                 headers: {
-                    'x-cors-grida-api-key': '4e2ca3b7-6d97-4457-9b5f-ec5b4c7ace28',
+                    'x-cors-grida-api-key': `${corsAPI}`,
                     'Content-Type': 'application/json'
                 }
             })

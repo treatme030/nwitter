@@ -3,6 +3,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 import palette from 'styles/palette';
 import date from 'lib/date';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const MapCovidInfoStyles = styled.div`
     margin-top: 5rem;
@@ -28,8 +30,9 @@ const MapCovidInfo = () => {
 
     const now = date()
     
-    const apiKey = process.env.REACT_APP_COVID_API_KEY
-    const url = `https://cors.bridged.cc/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=${apiKey}&startCreateDt=20210901&endCreateDt=${now}`
+    const covidAPI = process.env.REACT_APP_COVID_API_KEY
+    const corsAPI = process.env.REACT_APP_CORS_GRIDA_API_KEY
+    const url = `https://cors.bridged.cc/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=${covidAPI}&startCreateDt=20210901&endCreateDt=${now}`
 
 
     useEffect(() => {
@@ -37,7 +40,7 @@ const MapCovidInfo = () => {
             try {
                 const response = await axios.get(url, {
                     headers: {
-                        'x-cors-grida-api-key': '4e2ca3b7-6d97-4457-9b5f-ec5b4c7ace28',
+                        'x-cors-grida-api-key': `${corsAPI}`,
                         'Content-Type': 'application/json'
                     }
                 })
