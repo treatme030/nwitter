@@ -3,6 +3,7 @@ import { authService, dbService } from 'fbase';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Sweet from 'components/Sweet';
+import palette from 'styles/palette';
 
 const ProfileStyles = styled.div`
     width: 100%;
@@ -33,12 +34,20 @@ const ProfileStyles = styled.div`
         text-align: center;
         color: white;
         border-radius: 20px;
-        background-color: #04aaff;
+        background: ${palette.blue[1]};
         margin-top : 1rem;
+        transition: background .4s;
+        &:hover {
+            background: ${palette.blue[0]};
+        }
     }
     .logOut {
         margin-top: 5rem;
-        background-color: tomato;
+        background: ${palette.orange[0]};
+        transition: background .4s;
+        &:hover {
+            background: ${palette.orange[1]};
+        }
     }
 `;
 

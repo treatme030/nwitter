@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaTwitter, FaUser } from 'react-icons/fa';
 import styled from 'styled-components';
+import palette from 'styles/palette';
 
 const NavigationStyles = styled.nav`
     margin-bottom: 2rem;
@@ -12,7 +13,7 @@ const NavigationStyles = styled.nav`
             margin-right: 1rem;
         }
         .icon {
-            color: #04AAFF;
+            color: ${palette.blue[1]};
         }
         .nav_progile {
             margin-left: 1rem;

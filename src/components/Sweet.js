@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { dbService, storageService } from 'fbase';
 import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import styled from 'styled-components';
+import palette from 'styles/palette';
 
 const SweetStyles = styled.div`
     position: relative;
@@ -36,7 +37,7 @@ const SweetStyles = styled.div`
         padding: 0.7rem 2rem;
         text-align: center;
         border-radius: 20px;
-        background-color: #04aaff;
+        background-color: ${palette.blue[1]};
         color: #fff;
         margin-top: 1rem;
     }
@@ -47,7 +48,7 @@ const SweetStyles = styled.div`
         position: absolute;
         top: 3px;
         left: 2rem;
-        color: #04aaff;
+        color: ${palette.blue[1]};
         font-size: 1rem;
     }
     img {
@@ -73,12 +74,6 @@ const SweetStyles = styled.div`
 const Sweet = ({ id, text, attachmentUrl, createdAt, isOwner, userObj }) => {
     const [editing, setEditing] = useState(false)
     const [newSweet, setNewSweet] = useState(text)
-
-    const date = new Date(createdAt)
-    const year = date.getFullYear()
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    const createdate = `${year}.${month}.${day}`
 
     const onDeleteClick = async () => {
         const ok = window.confirm('삭제하시겠습니까?')//boolean 값 반환 
@@ -124,7 +119,7 @@ const Sweet = ({ id, text, attachmentUrl, createdAt, isOwner, userObj }) => {
                 <>
                     <h4>{text}</h4>
                     { attachmentUrl && (
-                        <img src={attachmentUrl}/>
+                        <img src={attachmentUrl} alt="이미지"/>
                     )}
                     {/* 유저와 작성자가 동일한 경우에만 버튼 보이도록 */}
                     { isOwner && (

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import palette from "./palette";
 
 const  GlobalStyles = createGlobalStyle`
     *{
@@ -42,7 +43,7 @@ const  GlobalStyles = createGlobalStyle`
         height: 40px;
         padding: 0 2rem;
         color: #fff;
-        border: 1px solid #04aaff;
+        border: 1px solid ${palette.blue[1]};
         border-radius: 20px;
         font-weight: 500;
         font-size: 1.2rem;
@@ -50,7 +51,7 @@ const  GlobalStyles = createGlobalStyle`
     .blue_button {
         position: absolute;
         right: 0;
-        background-color: #04aaff;
+        background-color: ${palette.blue[1]};
         height: 40px;
         width: 40px;
         padding: 1rem 0;
@@ -58,6 +59,10 @@ const  GlobalStyles = createGlobalStyle`
         border-radius: 20px;
         color: #fff;
         cursor: pointer;
+        transition: background-color .4s;
+        &:hover {
+            background-color: ${palette.blue[0]};
+        }
     }
 `;
 

@@ -3,6 +3,7 @@ import { dbService, storageService } from 'fbase';
 import { v4 as uuidv4 } from 'uuid';
 import { FaPlus, FaTimes } from 'react-icons/fa'
 import styled from 'styled-components';
+import palette from 'styles/palette';
 
 const SweetFactoryStyles = styled.form`
     display: flex;
@@ -26,14 +27,14 @@ const SweetFactoryStyles = styled.form`
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #04aaff;
+        color: ${palette.blue[1]};
         cursor: pointer;
         transition: color .4s;
         span {
             padding: 0 1rem;
         }
         &:hover {
-            color: tomato;
+            color: ${palette.orange[0]};
         }
     }
     .factoryFrom_attachment {
@@ -49,7 +50,7 @@ const SweetFactoryStyles = styled.form`
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #04aaff;
+            color: ${palette.blue[1]};
             cursor: pointer;
             text-align: center;
             margin: 1rem 0;
@@ -59,7 +60,7 @@ const SweetFactoryStyles = styled.form`
                 padding: 0 1rem;
             }
             &:hover {
-                color: tomato;
+                color: ${palette.orange[0]};
             }
         }
     }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import date from 'lib/date';
 require('dotenv').config()
 
 const Covid19Styles = styled.section`
@@ -21,11 +22,7 @@ const Covid19 = () => {
     const [covidInfo, setCovidInfo] = useState({})
 
     const fetchData = async () => {
-        const today = new Date()
-        const year = today.getFullYear()
-        const month = today.getMonth() + 1
-        const day = today.getDate()
-        const currentDate = '' + year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
+        const currentDate = date()
         
         const apiKey = process.env.REACT_APP_COVID_API_KEY
         const url = `https://cors.bridged.cc/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=${apiKey}&startCreateDt=20210901&endCreateDt=${currentDate}`

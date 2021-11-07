@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import palette from 'styles/palette';
+import date from 'lib/date';
 
 const MapCovidInfoStyles = styled.div`
     margin-top: 5rem;
     .city {
-        fill: #fc7001;
+        fill: ${palette.orange[0]};
         stroke: #fff;
         stroke-miterlimit: 10;
         transition: .4s;
     }
     .city.city_hover {
-        fill: #ef411f;
+        fill: ${palette.orange[1]};
     }
     .city_covid_info {
         display: block;
@@ -24,11 +26,7 @@ const MapCovidInfoStyles = styled.div`
 const MapCovidInfo = () => {
     const [sidoCovidInfo, setSidoCovidInfo] = useState([])
 
-    const today = new Date()
-    const year = today.getFullYear()
-    const month = today.getMonth() + 1
-    const day = today.getDate()
-    const now = '' + year + (month < 10 ? `0${month}` : month) + (day < 10 ? `0${day}` : day)
+    const now = date()
     
     const apiKey = process.env.REACT_APP_COVID_API_KEY
     const url = `https://cors.bridged.cc/http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=${apiKey}&startCreateDt=20210901&endCreateDt=${now}`

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { authService } from "fbase";
 import styled from 'styled-components';
+import palette from 'styles/palette';
 
 const AuthFormStyles = styled.div`
     width: 100%;
@@ -23,10 +24,14 @@ const AuthFormStyles = styled.div`
     }
     .authSubmit {
         text-align: center;
-        background: #04aaff;
+        background: ${palette.blue[1]};
         color: white;
         margin-top: 10;
         cursor: pointer;
+        transition: background .4s ;
+        &:hover {
+            background: ${palette.blue[0]};
+        }
     }
     .authError {
         color: tomato;
@@ -35,7 +40,7 @@ const AuthFormStyles = styled.div`
         font-size: 12px;
     }
     .authSwitch {
-        color: #04aaff;
+        color: ${palette.blue[1]};
         cursor: pointer;
         margin-top: 10px;
         margin-bottom: 50px;
@@ -43,6 +48,10 @@ const AuthFormStyles = styled.div`
         font-size: 12px;
         text-decoration: underline;
         text-align: center;
+        transition: color .4s;
+        &:hover {
+            color: ${palette.orange[0]};
+        }
     }
 `;
 

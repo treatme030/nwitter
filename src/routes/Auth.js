@@ -3,6 +3,7 @@ import { FaTwitter, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import AuthForm from "components/AuthForm";
 import styled from "styled-components";
+import palette from 'styles/palette';
 
 const AuthStyles = styled.div`
     display: flex;
@@ -11,7 +12,7 @@ const AuthStyles = styled.div`
     align-items: center;
     .icon_twitter {
         margin-bottom: 3rem;
-        color: #04AAFF;
+        color: ${palette.blue[1]};
     }
     .authBtns {
         display: flex;
@@ -45,7 +46,7 @@ const Auth = () => {
         } else if(name === 'github'){
             provider = new firebaseInstance.auth.GithubAuthProvider()
         }
-        const data = await authService.signInWithPopup(provider)//소셜로그인 진행 
+        await authService.signInWithPopup(provider)//소셜로그인 진행 
     }
 
     return ( 
