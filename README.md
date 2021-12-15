@@ -89,7 +89,7 @@
 
 5. 동영상 검색
 
-![Screenshot from 2021-11-06 17-10-06](https://user-images.githubusercontent.com/74355328/140602914-7a9f1ac9-c90f-46da-8719-42bf85a338c5.png)
+![동영상검색](https://user-images.githubusercontent.com/74355328/146197013-2a2114a7-6d68-43b6-9293-029bf265dccc.gif)
 
 * 입력된 검색어에 따른 인기 동영상을 kaka API를 사용하여 표시
 
