@@ -30,7 +30,7 @@
 
 4. 코로나 
 
-![Screenshot from 2021-11-06 17-09-47](https://user-images.githubusercontent.com/74355328/140602904-6fda6fba-85dd-4144-891f-051bc47b0054.png)
+![corona](https://user-images.githubusercontent.com/74355328/146196626-114d1872-d5c5-4060-b6a5-c6e52e6131ec.gif)
 
 * 코로나의 전체적인 감염 정보 표시
 * 코로나의 지역별 감염 정보 표시
