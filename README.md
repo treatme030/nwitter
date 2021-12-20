@@ -5,30 +5,16 @@
 * 최신 인기 동영상 검색을 위한 kakao API를 사용
 
 ### 각 부분 구현된 이미지와 구현에 사용한 방식과 라이브러리
-1. 로그인
-
-![Screenshot from 2021-11-06 17-10-21](https://user-images.githubusercontent.com/74355328/140602911-c095bbe8-a3f1-48fb-b3cc-0ae6ea067996.png)
-
+1. 로그인 / 메인 / 프로필 / 로그아웃
 * 기본 로그인/회원가입 및 소셜 인증을 통한 로그인
-
-
-2. 메인
-
-![Screenshot from 2021-11-07 16-18-43](https://user-images.githubusercontent.com/74355328/140636325-cddf112a-e258-4ca6-8395-4892a154cdd6.png) 
-
 * 글 입력과 이미지 첨부
 * 해당 유저가 작성한 글에 대해서만 수정/삭제 가능
-
-
-3. 프로필
-
-![Screenshot from 2021-11-07 16-19-09](https://user-images.githubusercontent.com/74355328/140636328-d4935e6e-a906-423a-9a62-387eeb35cce5.png)
-
 * 해당 유저의 displayName을 이용하여 프로필명 변경 가능 
 * 로그아웃
 
+![로그인](https://user-images.githubusercontent.com/74355328/146699283-13a7381f-49e4-4069-80c2-1ed5046fd8bf.gif)
 
-4. 코로나 
+2. 코로나 
 
 ![corona](https://user-images.githubusercontent.com/74355328/146196626-114d1872-d5c5-4060-b6a5-c6e52e6131ec.gif)
 
@@ -87,7 +73,7 @@
     }
    ```
 
-5. 동영상 검색
+3. 동영상 검색
 
 ![동영상검색](https://user-images.githubusercontent.com/74355328/146197013-2a2114a7-6d68-43b6-9293-029bf265dccc.gif)
 
